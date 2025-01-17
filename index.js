@@ -81,6 +81,10 @@ app.delete("/todos/:id", (req, res) => {
   res.status(200).send("Todo deleted successfully");
 });
 
+app.use((req, res, next) => {
+  res.status(404).send("Page Not Found");
+});
+
 app.listen(PORT, () => {
   console.log(`listening on http://localhost:${PORT}`);
 });
