@@ -56,7 +56,18 @@ app.post("/todos", (req, res) => {
   res.status(201).json(todo);
 });
 
-app.put("/todos/:id", (req, res) => {});
+app.put("/todos/:id", (req, res) => {
+  const id = parseInt(req.params.id);
+
+  const todoIndex = todos.findIndex((todo) => todo.id === id);
+
+  todos[todoIndex].title = req.body.title;
+  todos[todoIndex].description = req.body.description;
+
+  saveTodos(todos);
+
+  res.status(200).send("Edit Successfully");
+});
 
 app.delete("/todos/:id", (req, res) => {
   const id = parseInt(req.params.id);
